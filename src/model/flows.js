@@ -1,6 +1,7 @@
 // Importeer het database configuratie bestand
 const db = require('../config/db')
 
+// ObjectId type uit Mongoose halen voor eigen gebruik
 const schema = db.Schema
 const ObjectId = schema.ObjectId
 
