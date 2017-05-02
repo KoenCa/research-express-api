@@ -20,4 +20,4 @@ const Flow = db.model('Flow', {
 })
 
 // Exporteer het model voor gebruik in de controller
-module.exports = Flow;
+module.exports = Flow

@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // Mongoose eigen promise library is deprecated
 // Gebruik de ES6 promises
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise
 
 // Gebruik mongoose om connectie te maken met de database
 const db = mongoose.connect('mongodb://localhost/flows', (err) => {
@@ -13,4 +13,4 @@ const db = mongoose.connect('mongodb://localhost/flows', (err) => {
 });
 
 // Exporteer de connectie met de database voor gebruik in het model
-module.exports = db;
+module.exports = db

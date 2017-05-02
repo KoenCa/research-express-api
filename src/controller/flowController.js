@@ -19,4 +19,4 @@ router.get('/', (req, res) => {
 })
 
 // Exporteer de router voor gebruik in routes.js
-module.exports = router;
+module.exports = router

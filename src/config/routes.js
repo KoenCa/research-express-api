@@ -5,4 +5,4 @@ const router = require('express').Router()
 router.use('/flows', require('../controller/flowController'))
 
 // Exporteer de router zodat deze gebruikt kan worden in index.js
-module.exports = router;
+module.exports = router

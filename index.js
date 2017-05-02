@@ -17,5 +17,5 @@ app.use('/', routes)
 
 // Start de applicatie op poort 4000
 app.listen(4000, () => {
-    console.log('API started on http://localhost:4000');
+    console.log('API started on http://localhost:4000')
 });
