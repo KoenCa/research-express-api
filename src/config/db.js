@@ -9,8 +9,8 @@ mongoose.Promise = global.Promise
 const db = mongoose.connect('mongodb://localhost/flows', (err) => {
     err ?
         console.log('Can\'t connect to MongoDB', err) :
-        console.log('Connected to MongoDB');
-});
+        console.log('Connected to MongoDB')
+})
 
 // Exporteer de connectie met de database voor gebruik in het model
 module.exports = db
