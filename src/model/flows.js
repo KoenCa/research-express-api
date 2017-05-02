@@ -1,6 +1,9 @@
 // Importeer het database configuratie bestand
 const db = require('../config/db')
 
+const schema = db.Schema
+const ObjectId = schema.ObjectId
+
 // Gebruik db connectie om een nieuw mongoose model aan te maken
 const Flow = db.model('Flow', {
     trashed: Boolean,
