@@ -11,6 +11,7 @@ db.connect(false, () => {})
 const flowModel = require('../model/flows')
 const flowController = require('../controller/flowController')
 
+// Gebruik mock module om een response object aan te maken met standaard instellingen.
 function buildResponse() {
     return http_mocks.createResponse({ eventEmitter: require('events').EventEmitter })
 }
