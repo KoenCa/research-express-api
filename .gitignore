@@ -38,3 +38,6 @@ jspm_packages
 
 # ESlint
 .eslintrc.json
+
+# VS code
+.vscode
