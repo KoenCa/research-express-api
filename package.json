@@ -19,6 +19,7 @@
     "sinon-mongoose": "^2.0.1"
   },
   "scripts": {
+    "start": "node index.js",
     "test": "./node_modules/.bin/mocha ./src/tests/"
   }
 }
