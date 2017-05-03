@@ -1,7 +1,13 @@
+// Laad de benodigde test modules
 const http_mocks = require('node-mocks-http')
 const should = require('should')
 const sinon = require('sinon')
 const sinonMongoose = require('sinon-mongoose')
+
+// Geen connectie met een database maken omdat we aan het testen zijn
+// Volgorde is hier belangrijk!
+const db = require('../config/db')
+db.connect(false, () => {})
 const flowModel = require('../model/flows')
 const flowController = require('../controller/flowController')
 
