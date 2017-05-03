@@ -2,7 +2,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const routes = require('./src/config/routes')
+const db = require('./src/config/db')
 
 // Express moet bodyparser gebruiken voor de request bodies
 app.use(bodyParser.urlencoded({
@@ -12,10 +12,16 @@ app.use(bodyParser.urlencoded({
 // De bodies worden omgezet naar application/json formaat
 app.use(bodyParser.json())
 
-// Definieer de endpoints van de API
-app.use('/', routes)
-
-// Start de applicatie op poort 4000
-app.listen(4000, () => {
-    console.log('API started on http://localhost:4000')
+// Connecteer met de MongoDb Database en start de applicatie
+db.connect(true, (err) => {
+    if (err) {
+        console.log(err.message)
+    } else {
+        // Definieer de endpoints van de API nadat connectie met de database is aangemaakt
+        app.use('/', require('./src/config/routes'))
+        
+        app.listen(4000, () => {
+            console.log('API started on http://localhost:4000')
+        })
+    }
 })
