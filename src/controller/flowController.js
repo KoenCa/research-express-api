@@ -6,11 +6,14 @@ const flow = require('../model/flows')
 router.get('/', (req, res) => {
 
     //Gebruik lean() omdat dit veel meer performance bied
-    flow.find().lean().exec((err, flows) => {
-        err ?
-            res.status(500).json() :
-            res.json({ flows })
-    })
+    flow
+        .find()
+        .lean()
+        .exec((err, flows) => {
+            err ?
+                res.status(500).json() :
+                res.json({ flows })
+        })
 })
 
 // Geeft een flow terug volgens een ID
