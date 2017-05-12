@@ -7,13 +7,9 @@ router.get('/', (req, res) => {
 
     //Gebruik lean() omdat dit veel meer performance bied
     flow.find().lean().exec((err, flows) => {
-        if (err) {
-            res.status(500).json()
-        }
-
-        if (flows) {
+        err ?
+            res.status(500).json() :
             res.json({ flows })
-        }
     })
 })
 
