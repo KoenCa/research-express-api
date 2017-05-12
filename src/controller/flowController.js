@@ -12,10 +12,22 @@ router.get('/', (req, res) => {
             res.status(500).json()
         }
 
-        if(flows) {
-            res.json({flows})
+        if (flows) {
+            res.json({ flows })
         }
     })
+})
+
+router.get('/:id', (req, res) => {
+
+    flow
+        .findOne({ '_id': req.params.id })
+        .lean()
+        .exec((err, flow) => {
+            err ?
+                res.status(500).json() :
+                res.json({ flow })
+        })
 })
 
 // Exporteer de router voor gebruik in routes.js
