@@ -18,10 +18,10 @@ function buildResponse() {
 
 describe('Flows Controller Tests', () => {
 
-    describe('Gets flows from database', () => {
+    describe('/flows', () => {
         let flowMock = sinon.mock(flowModel)
 
-        before(() => {
+        beforeEach(() => {
             flowMock
                 .expects('find')
                 .chain('lean')
@@ -29,7 +29,7 @@ describe('Flows Controller Tests', () => {
                 .yields(null, { test: 'test' })
         })
 
-        after(() => {
+        afterEach(() => {
             flowMock.restore()
         })
 
@@ -43,9 +43,6 @@ describe('Flows Controller Tests', () => {
             response.on('end', () => {
                 response._isJSON().should.be.true
                 response.statusCode.should.eql(200)
-
-                const data = JSON.parse(response._getData())
-                should.not.exist(data.message)
                 done()
             })
 
@@ -54,7 +51,7 @@ describe('Flows Controller Tests', () => {
     })
 
 
-    describe('Gets error from database', () => {
+    describe('/flows with error from db', () => {
         let flowMock = sinon.mock(flowModel)
 
         before(function () {
@@ -85,4 +82,69 @@ describe('Flows Controller Tests', () => {
             flowController.handle(request, response, done)
         })
     })
+
+    describe('/flows/:id', () => {
+        let flowMock = sinon.mock(flowModel)
+
+        beforeEach(() => {
+            flowMock
+                .expects('findOne')
+                .chain('lean')
+                .chain('exec')
+                .yields(null, { test: 'test' })
+        })
+
+        afterEach(() => {
+            flowMock.restore()
+        })
+
+        it('should return with status 200', (done) => {
+            const response = buildResponse()
+            const request = http_mocks.createRequest({
+                method: 'GET',
+                url: '/1234'
+            })
+
+            response.on('end', () => {
+                response._isJSON().should.be.true
+                response.statusCode.should.eql(200)
+                done()
+            })
+
+            flowController.handle(request, response, done)
+        })
+    })
+
+    describe('/flows/:id with error from db', () => {
+        let flowMock = sinon.mock(flowModel)
+
+        before(function () {
+            flowMock
+                .expects('findOne')
+                .chain('lean')
+                .chain('exec')
+                .yields(new Error('test'), { test: 'test' })
+        })
+
+        after(() => {
+            flowMock.restore()
+        })
+
+        it('should return with status 500', (done) => {
+            const response = buildResponse()
+            const request = http_mocks.createRequest({
+                method: 'GET',
+                url: '/1234'
+            })
+
+            response.on('end', () => {
+                response._isJSON().should.be.true
+                response.statusCode.should.eql(500)                
+                done()
+            })
+
+            flowController.handle(request, response, done)
+        })
+    })
+
 })
